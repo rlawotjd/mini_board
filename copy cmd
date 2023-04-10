@@ -1,0 +1,1 @@
+xcopy D:\std\mini_board\doc\src C:\Apache24\htdocs\mini_board\doc\src /E /H /F /Y
