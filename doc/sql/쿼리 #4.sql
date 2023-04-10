@@ -1,0 +1,87 @@
+-- delimiter $$
+-- CREATE PROCEDURE myfunction()
+-- BEGIN
+-- 	DECLARE i INT;
+-- 	SET i= 6;
+-- 	WHILE (i<=20) DO
+-- 		INSERT INTO board_info(board_title
+-- 				,board_contents
+-- 				,board_write_date
+-- 		)
+-- 		VALUES('제목i';
+-- 		,'내용i';
+-- 		,NOW()
+-- 		);
+-- 		SET i=i+1;
+-- 	END WHILE;
+-- END $$
+-- delimiter;
+
+
+
+
+-- INSERT INTO board_info(board_title
+-- 				,board_contents
+-- 				,board_write_date
+-- )
+-- VALUES('제목5'
+-- 	,'내용5'
+-- 	,NOW()
+-- 	)
+-- ,('제목6'
+-- 	,'내용6'
+-- 	,NOW()
+-- 	)
+-- 	,('제목7'
+-- 	,'내용7'
+-- 	,NOW()
+-- 	)
+-- 	,('제목8'
+-- 	,'내용8'
+-- 	,NOW()
+-- 	)
+-- 	,('제목9'
+-- 	,'내용9'
+-- 	,NOW()
+-- 	)
+-- 	,('제목10'
+-- 	,'내용10'
+-- 	,NOW()
+-- 	)
+-- 	,('제목11'
+-- 	,'내용11'
+-- 	,NOW()
+-- 	)
+-- 		,('제목12'
+-- 	,'내용12'
+-- 	,NOW()
+-- 	)	,('제목13'
+-- 	,'내용13'
+-- 	,NOW()
+-- 	)	,('제목14'
+-- 	,'내용14'
+-- 	,NOW()
+-- 	)	,('제목15'
+-- 	,'내용15'
+-- 	,NOW()
+-- 	)	,('제목16'
+-- 	,'내용16'
+-- 	,NOW()
+-- 	)	,('제목17'
+-- 	,'내용17'
+-- 	,NOW()
+-- 	)	,('제목18'
+-- 	,'내용18'
+-- 	,NOW()
+-- 	)	,('제목19'
+-- 	,'내용19'
+-- 	,NOW()
+-- 	)	,('제목20'
+-- 	,'내용20'
+-- 	,NOW()
+-- 	);
+
+-- SELECT * FROM board_info;
+
+-- commit;
+	
