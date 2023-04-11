@@ -29,8 +29,10 @@
     // print_r($result_cnt);
     // print_r($result_paging);
     // echo($max_page_num);
-
     // echo DOC_ROOT;
+    $now_page_temp=$_SERVER['REQUEST_URI'];
+    $now_page= mb_substr( $now_page_temp,-1);
+    // echo $now_page;
 ?>
 
 
@@ -40,41 +42,89 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="./css/test.css">
     <title>게시판</title>
 </head>
 <body>
-    <table class='table table-striped'>
-        <thead>
-            <tr>    
-                <th>게시글 번호</th>
-                <th>게시글 제목</th>
-                <th>작성일</th>
+    <div class="board_tabel">
+
+        <table class='table table-striped'>
+            <thead>
+                <tr class='tabel_head'>    
+                    <th>
+                        <p>
+                            게시글 번호
+                        </p> 
+                    </th>
+                    <th>
+                        <p>
+                            게시글 제목
+                        </p>
+                    </th>
+                <th>
+                    <p>
+                        작성일
+                    </p>
+                </th>
             </tr>
         </thead>
         <tbody>
             <?php
                 foreach ($result_paging as $key => $recode) {
-            ?>
+                    ?>
                 <tr>
                     <td><?php echo $recode["board_no"]?></td>
-                    <td><?php echo $recode["board_title"]?></td>
+                    <td><a href="./board_update.php?board_no=<?php echo $recode["board_no"]?>"><?php echo $recode["board_title"]?></a></td>
                     <td><?php echo $recode["board_write_date"]?></td>
                 </tr>
-            <?php
+                <?php
                 }
-            ?>
+                ?>
         </tbody>
     </table>
-    <div>
+    </div>
+    <div class='botten'>
+        <a class='moving_botten' href="board_list.php?page_num=1">처음으로</a>
+        <?php 
+        if ($now_page!=1) {
+        ?>
+            <a class='moving_botten' href="board_list.php?page_num=<?php echo $now_page-1?>">이전</a>
+        <?php
+        }
+        ?>
         <?php $i=1;
         while ($i <= $max_page_num) {
             ?>
-                <a href='board_list.php?page_num=<?php echo $i ?>'><?php echo $i //겟방식 ?></a>
+            <?php
+            if ($now_page==$i) { 
+                ?>
+                <a 
+                    href='board_list.php?page_num=<?php echo $i ?>' class ="taget_botten";>
+                <?php echo $i ?>
+                </a>
+            <?
+            }
+            else {
+                ?>
+                <a href='board_list.php?page_num=<?php echo $i ?>' class="no_taget_botten">
+                <?php echo $i ?>
+                </a>
+            <?
+            }
+            ?>
                 <?php
             $i++;
         }
         ?>
+        <?php 
+        if ($now_page!=$max_page_num) {
+        ?>
+            <a class='moving_botten' href="board_list.php?page_num=<?php echo $now_page+1?>">다음</a>
+        <?php
+        }
+        ?>
+        <a class='moving_botten' href="board_list.php?page_num=<?php echo $max_page_num?>">끝으로</a>
     </div>
 </body>
 </html>

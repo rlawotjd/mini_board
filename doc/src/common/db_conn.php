@@ -95,14 +95,98 @@ function select_board_info_count()
     
     return $result;
 }
+
+function select_board_info_no(&$param_no)
+{
+    $sql=
+    " SELECT " 
+        ." board_title "
+        ." ,board_contents "
+        ." ,board_no "
+    ." FROM "
+        ." board_info "
+    ." WHERE "
+        ." board_del_flg = '0' "
+        ." AND "
+        ." board_no = :board_no "
+        ;
+    
+    $arr_prepare =
+    array(
+        ":board_no" => $param_no
+    );
+    
+    $conn = null;
+    
+    try {
+        db_conn($conn);
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute($arr_prepare);
+        $result = $stmt->fetchAll();
+        
+        
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
+    finally{
+        $conn =null;
+    }
+    
+    return $result[0];
+}
+
+function update_board_info_no(&$param_arr)
+{
+    $sql=
+    " UPDATE "
+        ." board_info "
+    ." SET "
+    ." board_title =:board_title "
+    ." ,board_contents= :board_contents "
+    ." WHERE "
+    ." board_no =:board_no "
+    ;
+    
+    $arr_prepare =
+    array(
+        ":board_title" => $param_arr["board_title"]
+        ,":board_contents" => $param_arr["board_contents"]
+        ,":board_no" => $param_arr["board_no"]
+    );
+    
+    $conn = null;
+    
+    try {
+        db_conn($conn);
+        $conn->beginTransaction();
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute($arr_prepare);
+        
+        $result_count = $stmt->rowCount();
+        $conn->commit();
+        
+        
+        
+    } catch (Exception $e) {
+        $conn->rollBack();
+        return $e->getMessage();
+    }
+    finally{
+        $conn =null;
+    }
+    
+    return $result_count;
+}
+
+
 // //todo : test start
 
-// $arr = 
-//     array(
-//     );
+// $arr=array(
+//     "board_title" => "test1"
+//     ,"board_contents" => "testtesttest1"
+//     ,"board_no" => 1
+// );
 
-// $result =select_board_info_count();
-
-// print_r($result);
+// echo update_board_info_no($arr);
 
 // //todo : test end

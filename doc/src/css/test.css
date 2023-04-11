@@ -1,0 +1,39 @@
+*{
+    margin: 0; padding: 0;
+}
+.tabel_head{
+    border: 1px solid red;
+    background-color: rgb(20, 20, 20);
+}
+.tabel_head p{
+    color:rgba(255,255,255,0.7);
+
+}
+.board_tabel{
+    display: grid;
+    border: 1px solid red;
+}
+.botten{
+    border: 1px solid red;
+    margin: 0 auto;
+    width: 25%;
+    display: flex;
+    align-content: space-around;
+}
+.moving_botten{
+    width: auto; height: 5%;
+    border: 1px solid blue;
+    border-radius: 5px;
+}
+.taget_botten{
+    background-color: aqua;
+    border: 1px solid blue;
+    border-radius: 5px;
+    width: 5%; height: 5%;
+}
+.no_taget_botten{
+    background-color: aquamarine;
+    border: 1px solid blue;
+    border-radius: 5px;
+    width: 5%; height: 5%;
+}
