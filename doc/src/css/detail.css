@@ -1,0 +1,20 @@
+*{
+    margin: 0; padding: 0;
+}
+.grid_center{
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-rows: 1fr 4fr;
+}
+.detail_head{
+    background-color: black;
+    color: rgba(255, 255, 255, 0.7);
+}
+.detail_main{
+    padding: 5px;
+    background-color: #373b3e;
+    color: rgba(255, 255, 255, 0.7);
+}
+a{
+    text-decoration: none;
+}

@@ -103,6 +103,7 @@ function select_board_info_no(&$param_no)
         ." board_title "
         ." ,board_contents "
         ." ,board_no "
+        ." ,board_write_date " //0412 작성일 추가
     ." FROM "
         ." board_info "
     ." WHERE "
@@ -177,16 +178,54 @@ function update_board_info_no(&$param_arr)
     
     return $result_count;
 }
+function update_del_flg(&$param_arr)
+{
+    $sql=
+    " UPDATE "
+        ." board_info "
+    ." SET "
+    ." board_del_flg='1' "
+    ." ,board_del_date=NOW() "
+    ." WHERE "
+    ." board_no =:board_no "
+    ;
+    
+    $arr_prepare =
+    array(
+        ":board_no" => $param_arr
+    );
+    
+    $conn = null;
+    
+    try {
+        db_conn($conn);
+        $conn->beginTransaction();
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute($arr_prepare);
+        
+        $result_count = $stmt->rowCount();
+        $conn->commit();
+        
+        
+        
+    } catch (Exception $e) {
+        $conn->rollBack();
+        return $e->getMessage();
+    }
+    finally{
+        $conn =null;
+    }
+    
+    return $result_count;
+}
 
 
 // //todo : test start
 
 // $arr=array(
-//     "board_title" => "test1"
-//     ,"board_contents" => "testtesttest1"
-//     ,"board_no" => 1
+//     "board_no" => 4
 // );
 
-// echo update_board_info_no($arr);
+// echo update_del_flg($arr);
 
 // //todo : test end
