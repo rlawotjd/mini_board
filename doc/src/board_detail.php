@@ -9,7 +9,7 @@
     
     $limit_num=5;
 
-    $result_all_cnt = select_board_info_count(); //전체 카운트
+    $result_all_cnt = select_board_info_allcount(); //전체 카운트
 
     $max_page_num=ceil($result_all_cnt[0]["cnt"]/$limit_num);
 

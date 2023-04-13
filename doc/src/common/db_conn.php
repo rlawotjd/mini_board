@@ -73,9 +73,41 @@ function select_board_info_count()
     ." FROM "
     ." board_info "
     ." where "
-    ." board_del_flg ='0' "
+    ." board_del_flg = '0' "
     ;
-    $arr_prepare = array();
+    $arr_prepare = array(
+        // ":board_del_flg" => $param_flg //이상,,,,
+    );
+
+    $conn =null;
+
+    try {
+        db_conn($conn);
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute($arr_prepare);
+        $result = $stmt->fetchAll();
+        
+        
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
+    finally{
+        $conn =null;
+    }
+    
+    return $result;
+}
+function select_board_info_allcount()
+{
+    $sql =
+    " SELECT "
+    ." COUNT(*) as cnt "
+    ." FROM "
+    ." board_info "
+    ;
+    $arr_prepare = array(
+        // ":board_del_flg" => $param_flg //이상,,,,
+    );
 
     $conn =null;
 
@@ -219,13 +251,59 @@ function update_del_flg(&$param_arr)
     return $result_count;
 }
 
+function insert_board_info(&$param_arr)
+{
+    $sql=
+    "INSERT INTO board_info("
+        ." board_title "
+        ." ,board_contents "
+        ." ,board_write_date "
+        // ." ,board_no "   
+        ." ) "
+    ." VALUES( "
+        ." :board_title "
+        ." ,:board_contents "
+        ." ,NOW() "
+        // ." ,:board_no "
+        ." ) "
+        ;
+    
+    $arr_prepare =
+    array(
+        ":board_title"     => $param_arr["board_title"]
+        ,":board_contents"  => $param_arr["board_contents"]
+        // ,"board_write_date" => $param_arr["board_write_date"]
+        // ,":board_no"         => $param_arr["board_no"]
+    );
+    
+    $conn = null;
+    
+    try {
+        db_conn($conn);
+        $conn->beginTransaction();
+        $stmt = $conn ->prepare($sql);
+        $stmt->execute($arr_prepare);
+        
+        $result_count = $stmt->rowCount();
+        $conn->commit();
+        
+        
+        
+    } catch (Exception $e) {
+        $conn->rollBack();
+        return $e->getMessage();
+    }
+    finally{
+        $conn =null;
+    }
+    
+    return $result_count;
+}
 
-// //todo : test start
 
-// $arr=array(
-//     "board_no" => 4
-// );
+//todo : test start
 
-// echo update_del_flg($arr);
+// var_dump( select_board_info_count());
+// var_dump( select_board_info_allcount());
 
-// //todo : test end
+//todo : test end

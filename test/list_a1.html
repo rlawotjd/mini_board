@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <style>
+        *{
+            margin: 0; padding: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        .grid_board{
+            display: grid;
+            grid-template-columns: 1fr 4fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            border: 1px solid red;
+        }
+        .flex_bouten{
+            margin: 0 auto;
+        width: 40%;
+        min-width: fit-content;
+        display: flex;
+        justify-content:space-between;
+        }
+        .board_head{
+            background-color: rgb(90, 0, 180);
+            color: rgba(0, 255, 0, 0.7);
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.7);
+        }
+        .board_main{
+            background-color: rgb(90, 0, 180);
+            color: rgba(0, 255, 0, 0.7);
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.7);
+        }
+        .board_main a{
+            color: rgba(0, 255, 0, 0.7);
+        }
+        .board_main a:hover{
+            color: rgba(0, 255, 0, 1);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 1);
+        }
+        .board_top{
+            background-image: url(./Untitled-1.gif);
+        }
+    </style>
+</head>
+<body>
+    <div class=grid_board>
+        <div></div>
+        <div class="board_top"></div>
+        <div></div>
+        <div></div>
+        <table class=>
+            <thead>
+                <tr class='board_head'>    
+                    <th>
+                        <p>
+                            게시글 번호
+                        </p> 
+                    </th>
+                    <th>
+                        <p>
+                            게시글 제목
+                        </p>
+                    </th>
+                <th>
+                    <p>
+                        작성일
+                    </p>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="board_main">
+                <tr>
+                    <td class=>번호1</td>
+                    <td class=><a href="./board_detail.php?board_no=1">제목1</a></td>
+                    <td class=>게시일1</td>
+                </tr>
+                <tr>
+                    <td class=>번호1</td>
+                    <td class=><a href="./board_detail.php?board_no=1">제목1</a></td>
+                    <td class=>게시일1</td>
+                </tr>
+                <tr>
+                    <td class=>번호1</td>
+                    <td class=><a href="./board_detail.php?board_no=1">제목1</a></td>
+                    <td class=>게시일1</td>
+                </tr>
+                <tr>
+                    <td class=>번호1</td>
+                    <td class=><a href="./board_detail.php?board_no=1">제목1</a></td>
+                    <td class=>게시일1</td>
+                </tr>
+                <tr>
+                    <td class=>번호1</td>
+                    <td class=><a href="./board_detail.php?board_no=1">제목1</a></td>
+                    <td class=>게시일1</td>
+                </tr>
+                <tr>
+                    <td class=>번호1</td>
+                    <td class=><a href="./board_detail.php?board_no=1">제목1</a></td>
+                    <td class=>게시일1</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class='flex_bouten'>
+        <a class='' href="board_list.php?page_num=1">처음으로</a>
+        
+            <a class='' href="board_list.php?page_num=1">이전</a>
+        
+                <a 
+                    href='' class ="taget_botten";>
+                </a>
+            
+            
+                <a href='' class="no_taget_botten">
+                
+                </a>
+            
+            <a class='' href="board_list.php?page_num=1">다음</a>
+        
+        <a class='' href="board_list.php?page_num=1">끝으로</a>
+    </div>
+    <div></div>
+</body>
+</html>

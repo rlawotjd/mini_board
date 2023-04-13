@@ -13,7 +13,7 @@ a{
 .board_tabel{
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 20% 80%;
 }
 .text_color{
     color:rgb(255, 255, 255, 0.7);
@@ -51,4 +51,12 @@ a{
 }
 a:hover{
     color: white;
+}
+.button_move{
+    display: flex;
+    
+}
+h1{
+    color: rgba(50, 50, 50,0.7);
+    text-shadow: 2px 2px 4px black;
 }

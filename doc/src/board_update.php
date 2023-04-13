@@ -30,11 +30,17 @@
 
     $limit_num=5;
 
-    $result_all_cnt = select_board_info_count(); //전체 카운트
+    $result_cnt = select_board_info_count(); //활성화된 카운트
+    
+    $result_allcnt = select_board_info_allcount(); //모든 카운트
+    
+    $max_page_num=ceil($result_cnt[0]["cnt"]/$limit_num);
 
-    $max_page_num=ceil($result_all_cnt[0]["cnt"]/$limit_num);
+    $move_list=ceil(($result_allcnt[0]["cnt"]-$result_info["board_no"])/$limit_num);
 
-    // echo ceil($result_info["board_no"]/$limit_num);
+    echo $result_info["board_no"],$result_allcnt[0]["cnt"];
+
+
 
     // print_r($result_info);
 
@@ -45,8 +51,8 @@
     <meta charset='UTF-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel="stylesheet" href="./css/update.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/update.css">
     <title>게시판</title>
 </head>
 <body>
@@ -71,7 +77,7 @@
             <a href='board_detail.php?board_no=<?php echo $result_info["board_no"]?>'><input type='button' class="btn btn-secondary" value='수정취소'></input></a>
             <br>
             <br>
-            <a href='board_list.php?page_num=<?php echo ceil(($result_all_cnt[0]["cnt"]-$result_info["board_no"]+1)/$limit_num)?>'><input type='button' class="btn btn-secondary" value='리스트'></input></a>
+            <a href='board_list.php?page_num=<?php if ($result_allcnt[0]["cnt"]==$result_info["board_no"]) {echo 1;}else {echo $move_list;}?>'><input type='button' class="btn btn-secondary" value='리스트'></input></a>
         </form>
     </div>
     

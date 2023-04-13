@@ -1,6 +1,7 @@
 <?php
-    define("DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/");
-    define( "URL_DB", DOC_ROOT."mini_board\doc\src\common\db_conn.php");
+    define("DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/mini_board/doc/src/");
+    define( "URL_DB", DOC_ROOT."common/db_conn.php");
+    define( "URL_HEADER", DOC_ROOT."board_header.php");
     include_once(URL_DB);
     
     $http_method = $_SERVER["REQUEST_METHOD"];
@@ -13,12 +14,16 @@
     }
 
     $limit_num = 5;
-
+    $limit_butten =5;
+    $min_butten=ceil($page_num-($limit_butten/2));
+    $max_butten=floor($page_num+($limit_butten/2));
+    
     $offset=$limit_num * ($page_num-1);
     
-    $result_cnt = select_board_info_count(); //전체 카운트
-
+    $result_cnt = select_board_info_count(); //활성화된 전체 카운트
+    
     $max_page_num=ceil($result_cnt[0]["cnt"]/$limit_num);
+    $end_butten_page=$max_page_num-$limit_butten;
     
     $arr_prepare=
         array(
@@ -50,8 +55,11 @@
 </head>
 <body>
     <div class="board_tabel">
-        <div></div>
-        <div></div>
+            <div></div>
+            <div class='button_move'>
+            <?include_once(URL_HEADER);?>
+            <a href="./board_insert.php"><button type="button" class='moving_botten'>게시글 작성</button></a>
+        </div>
         <div></div>
         <div></div>
         <table class="table table-dark table-striped">
@@ -98,30 +106,65 @@
         <?php
         }
         ?>
-        <?php $i=1;
-        while ($i <= $max_page_num) {
-            ?>
-            <?php
-            if ($page_num==$i) { 
-                ?>
-                <a 
-                    href='board_list.php?page_num=<?php echo $i ?>' class ="taget_botten";>
-                <?php echo $i ?>
-                </a>
-            <?
+        <?php
+            if ($page_num<=$limit_butten) {
+                for ($i=1; $i <= $limit_butten; $i++) { 
+                    if ($page_num==$i) { 
+                        ?>
+                        <a
+                        href='board_list.php?page_num=<?php echo $i ?>' class ="taget_botten";>
+                        <?php echo $i ?>
+                    </a>
+                    <?
+                    }
+                    else {
+                        ?>
+                        <a href='board_list.php?page_num=<?php echo $i ?>' class="no_taget_botten">
+                            <?php echo $i ?>
+                        </a>
+                        <?
+                    }
+                }
             }
-            else {
-                ?>
-                <a href='board_list.php?page_num=<?php echo $i ?>' class="no_taget_botten">
-                <?php echo $i ?>
-                </a>
-            <?
+            elseif($end_butten_page<=$page_num && $page_num<=$max_page_num){
+                for ($i=$end_butten_page; $i <= $max_page_num; $i++) { 
+                    if ($page_num==$i) { 
+                        ?>
+                        <a
+                        href='board_list.php?page_num=<?php echo $i ?>' class ="taget_botten";>
+                        <?php echo $i ?>
+                    </a>
+                    <?
+                    }
+                    else {
+                        ?>
+                        <a href='board_list.php?page_num=<?php echo $i ?>' class="no_taget_botten">
+                            <?php echo $i ?>
+                        </a>
+                        <?
+                    }
+                }
+            }
+            elseif ($page_num>$limit_butten && $page_num<=$max_page_num) {
+                for ($i=$min_butten; $i <= $max_butten; $i++) { 
+                    if ($page_num==$i) { 
+                        ?>
+                        <a
+                        href='board_list.php?page_num=<?php echo $i ?>' class ="taget_botten";>
+                        <?php echo $i ?>
+                    </a>
+                    <?
+                    }
+                    else {
+                        ?>
+                        <a href='board_list.php?page_num=<?php echo $i ?>' class="no_taget_botten">
+                            <?php echo $i ?>
+                        </a>
+                        <?
+                    }
+                }
             }
             ?>
-                <?php
-            $i++;
-        }
-        ?>
         <?php 
         if ($page_num!=$max_page_num) {
         ?>
