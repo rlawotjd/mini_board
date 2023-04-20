@@ -1,6 +1,7 @@
 <?php
     define("DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/");
     define( "URL_DB", DOC_ROOT."mini_board\doc\src\common\db_conn.php");
+    define( "URL_HEADER", DOC_ROOT."mini_board/doc/src/board_header.php");
     include_once(URL_DB);
 
     $http_method = $_SERVER["REQUEST_METHOD"];
@@ -38,7 +39,7 @@
 
     $move_list=ceil(($result_allcnt[0]["cnt"]-$result_info["board_no"])/$limit_num);
 
-    echo $result_info["board_no"],$result_allcnt[0]["cnt"];
+    // echo $result_info["board_no"],$result_allcnt[0]["cnt"];
 
 
 
@@ -58,21 +59,24 @@
 <body>
     <div class="grid_center">
         <div></div>
-        <div class='update_head'>머리말</div>
+        <div class='head'>
+            <?include_once(URL_HEADER);?>
+        </div>
         <div></div>
         <div></div>
         <form method='post' action='board_update.php' class='update_main'>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="no" value='<? echo $result_info["board_no"]?>' readonly>
-            <br> >
-                <label for="no">게시글 번호</label>
+            <div class="mb-3">
+                <label for="no" class="form-label">게시판 번호</label>
+                <input type="text" class="form-control" id="no" placeholder="<? echo $result_info["board_no"]?>" readonly>
             </div>
-            <label for='title'>게시글 제목 : </label>
-            <input type='text' name='board_title' id='title' value='<? echo $result_info["board_title"]?>'>
-            <br>
-            <label for='content'>게시글 내용 : </label>
-            <input type='text' name='board_contents' id='content' value='<? echo $result_info["board_contents"]?>'>
-            <br>
+            <div class="mb-3">
+                <label for="title" class="form-label">게시판 제목</label>
+                <input type="text" class="form-control" id="title" placeholder="<? echo $result_info["board_title"]?>" >
+            </div>
+            <div class="mb-3">
+                <label for="contents" class="form-label">게시판 제목</label>
+                <input type="text" class="form-control" id="contents" placeholder="<? echo $result_info["board_contents"]?>" >
+            </div>
             <button type='submit' class="btn btn-secondary">확인</button>
             <a href='board_detail.php?board_no=<?php echo $result_info["board_no"]?>'><input type='button' class="btn btn-secondary" value='수정취소'></input></a>
             <br>

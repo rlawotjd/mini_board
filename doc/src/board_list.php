@@ -15,9 +15,9 @@
 
     $limit_num = 5;
     $limit_butten =5;
-
-    $max_butten= cei($max_page_num/$limit_butten)
-
+    $min_butten=ceil($page_num-($limit_butten/2));
+    $max_butten=floor($page_num+($limit_butten/2));
+    
     $offset=$limit_num * ($page_num-1);
     
     $result_cnt = select_board_info_count(); //활성화된 전체 카운트
@@ -25,15 +25,12 @@
     $max_page_num=ceil($result_cnt[0]["cnt"]/$limit_num);
     $end_butten_page=$max_page_num-$limit_butten;
     
-    
-
     $arr_prepare=
         array(
             "limit_count" => $limit_num
             ,"offset"   => $offset
         );
     $result_paging = select_board_info_paging($arr_prepare);
-    $page_num_temp=1;
     // print_r($result_cnt);
     // print_r($result_paging);
     // echo($max_page_num);
@@ -105,17 +102,73 @@
         <?php
         if ($page_num!=1) {
         ?>
-            <a class='moving_botten' href="board_list.php?page_num=<?php echo --$page_num_temp;?>">이전</a>
+            <a class='moving_botten' href="board_list.php?page_num=<?php echo $page_num-1;?>">이전</a>
         <?php
         }
         ?>
         <?php
-            for ($i=0; $i < ; $i++) { 
-                # code...
+            if ($page_num<=$limit_butten) {
+                for ($i=1; $i <= $limit_butten; $i++) { 
+                    if ($page_num==$i) { 
+                        ?>
+                        <a
+                        href='board_list.php?page_num=<?php echo $i ?>' class ="taget_botten";>
+                        <?php echo $i ?>
+                    </a>
+                    <?
+                    }
+                    else {
+                        ?>
+                        <a href='board_list.php?page_num=<?php echo $i ?>' class="no_taget_botten">
+                            <?php echo $i ?>
+                        </a>
+                        <?
+                    }
+                }
             }
+            elseif($end_butten_page<=$page_num && $page_num<=$max_page_num){
+                for ($i=$end_butten_page; $i <= $max_page_num; $i++) { 
+                    if ($page_num==$i) { 
+                        ?>
+                        <a
+                        href='board_list.php?page_num=<?php echo $i ?>' class ="taget_botten";>
+                        <?php echo $i ?>
+                    </a>
+                    <?
+                    }
+                    else {
+                        ?>
+                        <a href='board_list.php?page_num=<?php echo $i ?>' class="no_taget_botten">
+                            <?php echo $i ?>
+                        </a>
+                        <?
+                    }
+                }
+            }
+            elseif ($page_num>$limit_butten && $page_num<=$max_page_num) {
+                for ($i=$min_butten; $i <= $max_butten; $i++) { 
+                    if ($page_num==$i) { 
+                        ?>
+                        <a
+                        href='board_list.php?page_num=<?php echo $i ?>' class ="taget_botten";>
+                        <?php echo $i ?>
+                    </a>
+                    <?
+                    }
+                    else {
+                        ?>
+                        <a href='board_list.php?page_num=<?php echo $i ?>' class="no_taget_botten">
+                            <?php echo $i ?>
+                        </a>
+                        <?
+                    }
+                }
+            }
+            ?>
+        <?php 
         if ($page_num!=$max_page_num) {
         ?>
-            <a class='moving_botten' href="board_list.php?page_num=<?php echo ++$page_num_temp?>">다음</a>
+            <a class='moving_botten' href="board_list.php?page_num=<?php echo $page_num+1?>">다음</a>
         <?php
         }
         ?>

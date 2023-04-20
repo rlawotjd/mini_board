@@ -52,10 +52,6 @@ a{
 a:hover{
     color: white;
 }
-.button_move{
-    display: flex;
-    
-}
 h1{
     color: rgba(50, 50, 50,0.7);
     text-shadow: 2px 2px 4px black;

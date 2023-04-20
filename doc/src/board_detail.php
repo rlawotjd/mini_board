@@ -1,6 +1,7 @@
 <?php
     define("DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]."/");
     define( "URL_DB", DOC_ROOT."mini_board\doc\src\common\db_conn.php");
+    define( "URL_HEADER", DOC_ROOT."mini_board/doc/src/board_header.php");
     include_once(URL_DB);
 
     $arr_get=$_GET;
@@ -29,7 +30,9 @@
     <body>
         <div class=grid_center>
             <div></div>
-            <div class=detail_head>머리말</div>
+            <div calss='head'>
+            <?include_once(URL_HEADER);?>
+            </div>
             <div></div>
             <div></div>
             <div class=detail_main>

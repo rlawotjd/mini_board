@@ -18,3 +18,14 @@
 a{
     text-decoration: none;
 }
+.head{
+    min-width: fit-content; height: 30px;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: rgb(20, 20, 20);
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+h1{
+    color: rgba(50, 50, 50,0.7);
+    text-shadow: 2px 2px 4px black;
+}
